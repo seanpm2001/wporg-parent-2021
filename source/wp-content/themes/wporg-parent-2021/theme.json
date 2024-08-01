@@ -691,6 +691,19 @@
 					"slug": "heading-cta"
 				}
 			]
+		},
+		"blocks": {
+			"core/post-comments-form": {
+				"custom": {
+					"form": {
+						"border": {
+							"width": "1px",
+							"style": "solid",
+							"color": "var(--wp--preset--color--charcoal-5)"
+						}
+					}
+				}
+			}
 		}
 	},
 	"styles": {

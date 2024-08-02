@@ -17,17 +17,25 @@ add_filter( 'wp_theme_json_data_user', __NAMESPACE__ . '\inject_i18n_customizati
  * @return WP_Theme_JSON_Data The updated user settings.
  */
 function inject_i18n_customizations( $theme_json ) {
-	$locale_settings = get_locale_customizations( get_locale() );
-	if ( ! $locale_settings ) {
+	$locale_settings = get_locale_settings( get_locale() );
+	$locale_styles = get_locale_styles( get_locale() );
+	if ( ! $locale_settings && ! $locale_styles ) {
 		return $theme_json;
 	}
 
 	$config = array(
 		'version' => 2,
-		'settings' => $locale_settings,
 	);
 
-	return new \WP_Theme_JSON_Data( $config, 'custom' );
+	if ( $locale_settings ) {
+		$config['settings'] = $locale_settings;
+	}
+
+	if ( $locale_styles ) {
+		$config['styles'] = $locale_styles;
+	}
+
+	return $theme_json->update_with( $config, 'custom' );
 }
 
 /**
@@ -43,7 +51,7 @@ function inject_i18n_customizations( $theme_json ) {
  *
  * @return array An array of settings mirroring a theme.json "settings" object.
  */
-function get_locale_customizations( $locale ) {
+function get_locale_settings( $locale ) {
 	switch ( $locale ) {
 		case 'ca':
 		case 'fr_FR':
@@ -103,4 +111,24 @@ function get_locale_customizations( $locale ) {
 			];
 	}
 	return false;
+}
+
+/**
+ * Get a theme.json-shaped array with custom values for a given locale.
+ *
+ * The returned array should match the structure of "styles" in a theme.json
+ * file. This can be used to override block, element, and sitewide styles.
+ * The `css` key can also be used to inject CSS code into all child themes.
+ *
+ * @param string $locale The current site locale.
+ *
+ * @return array An array of styles mirroring a theme.json "styles" object.
+ */
+function get_locale_styles( $locale ) {
+	switch ( $locale ) {
+		case 'ja':
+			return [
+				'css' => 'body { font-feature-settings: "palt"; }',
+			];
+	}
 }

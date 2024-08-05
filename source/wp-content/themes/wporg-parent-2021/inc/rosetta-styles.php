@@ -109,6 +109,34 @@ function get_locale_settings( $locale ) {
 					],
 				],
 			];
+		case 'ckb':
+			return [
+				'custom' => [
+					'heading' => [
+						'typography' => [
+							'fontFamily' => 'var(--wp--preset--font-family--noto-kufi)',
+						],
+					],
+				],
+				'typography' => [
+					'fontFamilies' => [
+						[
+							'fontFamily' => '"Noto Kufi Arabic", sans-serif',
+							'slug' => 'noto-kufi',
+							'name' => 'Noto Kufi Arabic',
+						],
+						// Unset courier-prime & anton, elements using these styles should fall back to Noto Kufi.
+						[
+							'fontFamily' => '',
+							'slug' => 'courier-prime',
+						],
+						[
+							'fontFamily' => '',
+							'slug' => 'anton',
+						],
+					],
+				],
+			];
 	}
 	return false;
 }
@@ -129,6 +157,29 @@ function get_locale_styles( $locale ) {
 		case 'ja':
 			return [
 				'css' => 'body { font-feature-settings: "palt"; }',
+			];
+		case 'ckb':
+			return [
+				// Force any inline inter styles to use Noto Kufi (used for global header, `.has-inter-font-family`, etc).
+				'css' => <<<CSS
+* {
+	--wp--preset--font-family--inter: var(--wp--preset--font-family--noto-kufi) !important;
+	--wp--preset--font-family--eb-garamond: var(--wp--preset--font-family--noto-kufi) !important;
+}
+span.global-footer__code_is_poetry {
+	font-family: var(--wp--preset--font-family--noto-kufi) !important;
+}
+CSS,
+				'typography' => [
+					'fontFamily' => 'var(--wp--preset--font-family--noto-kufi)',
+				],
+				'blocks' => [
+					'core/button' => [
+						'typography' => [
+							'fontFamily' => 'var(--wp--preset--font-family--noto-kufi)',
+						],
+					],
+				],
 			];
 	}
 }

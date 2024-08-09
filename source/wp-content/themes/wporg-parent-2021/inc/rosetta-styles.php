@@ -137,6 +137,18 @@ function get_locale_settings( $locale ) {
 					],
 				],
 			];
+		case 'vi':
+			return [
+				'typography' => [
+					'fontFamilies' => [
+						// Unset courier-prime, does not support Vietnamese diacritics.
+						[
+							'fontFamily' => '',
+							'slug' => 'courier-prime',
+						],
+					],
+				],
+			];
 	}
 	return false;
 }

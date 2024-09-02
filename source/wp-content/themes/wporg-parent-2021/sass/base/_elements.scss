@@ -156,10 +156,24 @@ input[type="checkbox"] + label {
 	line-height: 1em; // stylelint-disable-line declaration-property-unit-allowed-list
 }
 
-// Fix the chevron style on Jetpack's contact form.
-.contact-form .contact-form__select-wrapper::after {
-	inset-block-start: calc(50% - 2px) !important;
-	inset-inline-end: 20px !important;
+// Update Jetpack form default styles.
+.wp-block-jetpack-contact-form {
+
+	// Fix the chevron style on Jetpack's contact form.
+	&.contact-form .contact-form__select-wrapper::after {
+		inset-block-start: calc(50% - 2px);
+		inset-inline-end: 20px;
+	}
+
+	&.contact-form label {
+		font-weight: 400;
+	}
+
+	&.contact-form label span.required,
+	.grunion-label-required {
+		opacity: 1;
+		color: var(--wp--preset--color--charcoal-4);
+	}
 }
 
 // Headings.

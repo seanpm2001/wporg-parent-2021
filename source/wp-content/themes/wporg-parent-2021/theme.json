@@ -237,8 +237,8 @@
 				},
 				"spacing": {
 					"padding": {
-						"top": "16px",
-						"bottom": "16px",
+						"top": "14px",
+						"bottom": "14px",
 						"left": "32px",
 						"right": "32px"
 					}
@@ -251,7 +251,7 @@
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--normal)",
 					"fontWeight": "600",
-					"lineHeight": "var(--wp--custom--body--small--typography--line-height)"
+					"lineHeight": "1.3"
 				}
 			},
 			"form": {

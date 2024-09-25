@@ -26,6 +26,7 @@ body.error404 {
 			width: 100vw;
 			height: 100vh;
 			overflow: hidden;
+			z-index: -1;
 
 			> p {
 				display: none;
